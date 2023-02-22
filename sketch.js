@@ -14,7 +14,6 @@ let gridSize,
     newGenerationFrameCount,
     epoch,
     randomCreature,
-    safeZone,
     fitnessFunction,
     fitnessFunctions,
     onlyCrossingover,
@@ -36,7 +35,6 @@ function setup() {
     frameCount = constants.frameCount
     newGenerationFrameCount = constants.newGenerationFrameCount
     epoch = constants.epoch
-    safeZone = constants.safeZone
     fitnessFunction = constants.fitnessFunction
     onlyCrossingover = constants.onlyCrossingover
     wallNumber = constants.wallNumber
@@ -98,8 +96,6 @@ document.getElementById('resetButton').addEventListener('click', () => {
     frameCount = constants.frameCount
     newGenerationFrameCount = constants.newGenerationFrameCount
     epoch = constants.epoch
-    safeZone = constants.safeZone
-    fitnessFunction = constants.fitnessFunction
     onlyCrossingover = constants.onlyCrossingover
     wallNumber = constants.wallNumber
     fitnessFunctions = constants.fitnessFunctions
@@ -112,6 +108,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
     for (var i = 0; i < (gridSize.simX * gridSize.simY) / (creatureSize * creatureSize); i++) {
         grid.push(false)
     }
+    console.log((gridSize.simX * gridSize.simY) / (creatureSize * creatureSize))
     for (var i = 0; i < wallNumber; i++) {
         addWall()
     }
@@ -132,10 +129,16 @@ document.getElementById('addWallButton').addEventListener('click', () => {
     addWall()
 })
 
-document.getElementById('safeZoneSlider').addEventListener('input', () => {
-    safeZoneSlider = document.getElementById('safeZoneSlider')
-    safeZone = safeZoneSlider.value
-    safeZone = Math.max(safeZoneSlider.min, Math.min(safeZone, safeZoneSlider.max))
+document.getElementById('safeZoneSliderX').addEventListener('input', () => {
+    safeZoneSliderX = document.getElementById('safeZoneSliderX')
+    safeZone.x = parseInt(safeZoneSliderX.value)
+    safeZone.x = Math.max(safeZoneSliderX.min, Math.min(safeZone.x, safeZoneSliderX.max))
+})
+
+document.getElementById('safeZoneSliderY').addEventListener('input', () => {
+    safeZoneSliderY = document.getElementById('safeZoneSliderY')
+    safeZone.y = parseInt(safeZoneSliderY.value)
+    safeZone.y = Math.max(safeZoneSliderY.min, Math.min(safeZone.y, safeZoneSliderY.max))
 })
 
 document.getElementById('decisionThresholdSlider').addEventListener('input', () => {
@@ -151,4 +154,19 @@ document.getElementById('geneNumberSlider').addEventListener('input', () => {
 document.getElementById('brainSizeSlider').addEventListener('input', () => {
     constants.hiddenNumber = document.getElementById('brainSizeSlider').value
     document.getElementById('brainSize').innerHTML = 'Brain ' + constants.hiddenNumber
+})
+
+document.getElementById('mutationRateSlider').addEventListener('input', () => {
+    constants.mutationRate = document.getElementById('mutationRateSlider').value / 1000
+    document.getElementById('mutationRate').innerHTML = 'Mutation: ' + constants.mutationRate
+})
+
+document.getElementById('ySlider').addEventListener('input', () => {
+    safeZoneOffset.y = parseInt(document.getElementById('ySlider').value)
+    document.getElementById('y').innerHTML = 'Y: ' + safeZoneOffset.y
+})
+
+document.getElementById('xSlider').addEventListener('input', () => {
+    safeZoneOffset.x = parseInt(document.getElementById('xSlider').value)
+    document.getElementById('x').innerHTML = 'X: ' + safeZoneOffset.x
 })

@@ -1,11 +1,7 @@
 <div align="center">
-<style>
-    img {
-  border-radius: 50%;
-}
-    </style>
+
   <a href="https://github.com/Volthai7us/Evolution-Simulator/">
-    <img className="" src="https://avatars.githubusercontent.com/u/72819472?v=4" alt="Logo" width="100" height="100">
+    <img style="border-radius:50%;" src="https://avatars.githubusercontent.com/u/72819472?v=4" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">Evolution Simulator</h3>

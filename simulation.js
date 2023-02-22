@@ -115,8 +115,8 @@ function nextGeneration(auto = false) {
 function addWall(x, y, width, height) {
     x = x || Math.floor((Math.random() * gridSize.simX) / creatureSize) * creatureSize
     y = y || Math.floor((Math.random() * gridSize.simY) / creatureSize) * creatureSize
-    width = width || Math.floor((Math.random() * 100) / creatureSize) * creatureSize + 10
-    height = height || Math.floor((Math.random() * 100) / creatureSize) * creatureSize + 10
+    width = width || Math.floor((Math.random() * 100) / creatureSize) * creatureSize
+    height = height || Math.floor((Math.random() * 100) / creatureSize) * creatureSize
 
     walls.push({
         x: x,
@@ -153,4 +153,20 @@ document.addEventListener('keydown', function (event) {
 
 document.getElementById('fitnessFunctionSelect').addEventListener('change', function (event) {
     constants.fitnessFunction = event.target.value
+    if(constants.fitnessFunction == 'custom'){
+        document.getElementById('xSlider').removeAttribute('hidden')
+        document.getElementById('ySlider').removeAttribute('hidden')
+        document.getElementById('x').removeAttribute('hidden')
+        document.getElementById('y').removeAttribute('hidden')
+    }
+    else {
+        document.getElementById('xSlider').setAttribute('hidden', true)
+        document.getElementById('ySlider').setAttribute('hidden', true)
+        document.getElementById('x').setAttribute('hidden', true)
+        document.getElementById('y').setAttribute('hidden', true)
+    }
+})
+
+document.getElementById('creatureNumberSelect').addEventListener('change', function (event) {
+    constants.creatureNumber = event.target.value
 })

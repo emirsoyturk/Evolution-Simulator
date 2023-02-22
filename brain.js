@@ -8,7 +8,9 @@ class Brain {
         this.creature = creature
 
         if (genes) {
-            this.genes = genes
+            for(var i = 0; i < genes.length; i++) {
+                this.genes.push(genes[i].clone())
+            }
             this.inputNeurons = []
             this.hiddenNeurons = []
             this.outputNeurons = []

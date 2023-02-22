@@ -21,7 +21,7 @@ class Gene {
 
     clone() {
         let clone = new Gene(this.code)
-        if (Math.random() > 0.99) {
+        if (Math.random() < constants.mutationRate) {
             clone.mutate()
         }
 

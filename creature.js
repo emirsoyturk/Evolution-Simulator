@@ -239,6 +239,6 @@ class Creature {
             return
         }
         sim.fill(this.color)
-        sim.square(this.x, this.y, this.r)
+        sim.square(this.x, this.y, creatureSize)
     }
 }

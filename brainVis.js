@@ -2,20 +2,20 @@ function drawBrain() {
     brainVis.background(200)
 
     var brain = randomCreature.brain
-    var nodeSize = 40
     var gap = 10
+    var nodeSize = brainVis.width / (Math.max(inputNumber, Math.max(hiddenNumber, outputNumber)) + gap / 2)
     var leftMargin = 10
     var geneLength = gridSize.brainX - leftMargin - nodeSize
     var y = {
-        input: 100,
-        hidden: 200,
-        output: 300,
+        input: brainVis.height / 8,
+        hidden: brainVis.height / 4,
+        output: (brainVis.height) / 2.7,
     }
 
     brainVis.fill(0)
-    brainVis.textSize(25)
-    brainVis.text('Click a creature to see its brain', 10, 40)
-    brainVis.textSize(20)
+    brainVis.textSize(nodeSize * 0.6)
+    brainVis.text('Click a creature to see its brain', 10, nodeSize)
+    brainVis.textSize(nodeSize / 2)
     for (var i = 0; i < inputNumber; i++) {
         brainVis.fill(255, 0, 0)
         brainVis.strokeWeight(0)
@@ -42,12 +42,12 @@ function drawBrain() {
         brainVis.strokeWeight(0)
         brainVis.rect(i * (nodeSize + gap) + leftMargin, y.output, nodeSize, nodeSize)
         brainVis.fill(0)
-        brainVis.text(constants.outputNames[i], i * (nodeSize + gap) + leftMargin, y.output + nodeSize + 20)
+        brainVis.text(constants.outputNames[i], i * (nodeSize + gap) + leftMargin, y.output + nodeSize + nodeSize / 2)
         if (brain.outputNeurons[i]) {
             brainVis.text(
                 brain.outputNeurons[i].value.toString().substring(0, 4),
                 i * (nodeSize + gap) + leftMargin,
-                y.output + nodeSize + 40
+                y.output + nodeSize
             )
         }
     }
@@ -57,12 +57,11 @@ function drawBrain() {
         var incomeNeuron = gene.incomeNeuron
         var incomeNeuronType = gene.incomeNeuronType
         var outcomeNeuron = gene.outcomeNeuron
-        var weight = gene.weight
 
         if (incomeNeuronType == 0) {
             brainVis.fill(0)
             brainVis.strokeWeight(1)
-            brainVis.stroke(255, 0, 0)
+            brainVis.stroke(200, 40, 40)
             brainVis.line(
                 incomeNeuron * (nodeSize + gap) + leftMargin + nodeSize / 2,
                 y.input + nodeSize,
@@ -71,11 +70,10 @@ function drawBrain() {
             )
             brainVis.fill(0)
             brainVis.strokeWeight(0)
-            // brainVis.text(weight.toFixed(2), incomeNeuron * (nodeSize + gap) + leftMargin, y.input + nodeSize + 20)
         } else if (incomeNeuronType == 1) {
-            brainVis.fill(0, 255, 0)
+            brainVis.fill(0)
             brainVis.strokeWeight(1)
-            brainVis.stroke(0, 255, 0)
+            brainVis.stroke(40, 200, 40)
             brainVis.line(
                 incomeNeuron * (nodeSize + gap) + leftMargin + nodeSize / 2,
                 y.hidden + nodeSize,
@@ -84,10 +82,9 @@ function drawBrain() {
             )
             brainVis.fill(0)
             brainVis.strokeWeight(0)
-            // brainVis.text(weight.toFixed(2), outcomeNeuron * (nodeSize + gap) + leftMargin, y.hidden + nodeSize + 50)
         }
     }
-    brainVis.text(brain.toString(), leftMargin, 400, 400, 100)
+    // brainVis.text(brain.toString(), leftMargin, 400, 400, 100)
 
     for(var i = 0; i < brain.genes.length; i++) {
         var gene = brain.genes[i]
@@ -97,11 +94,15 @@ function drawBrain() {
         var col = color(r, g, b)
         brainVis.fill(col)
         brainVis.stroke(col)
-        brainVis.rect(leftMargin + i * (geneLength / brain.genes.length), 500 , geneLength / brain.genes.length, 50)
+        brainVis.rect(leftMargin + i * (geneLength / brain.genes.length), 400 , geneLength / brain.genes.length, 50)
     }
 
+    stroke(0);
+    strokeWeight(4);
+    rect(0, 0, gridSize.brainX, gridSize.brainY);
     image(brainVis, 0, 0)
 }
+
 
 function mouseClicked() {
     var x = Math.floor((mouseX - gridSize.brainX) / creatureSize)
