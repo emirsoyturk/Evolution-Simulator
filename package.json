@@ -1,0 +1,11 @@
+{
+  "name": "evolution",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "-",
+  "main": "index.js",
+  "repository": "-",
+  "author": "emir.s",
+  "license": "MIT",
+  "private": false
+}

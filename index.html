@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>Evolution</title>
+    </head>
+    <body>
+        <h1 id="title">Evolution</h1>
+
+        <div id="gen-fit">
+            <h2 id="generation"></h2>
+
+            <button id="resetButton">Reset</button>
+            <button id="playButton">Play</button>
+            <button id="nextButton">Next</button>
+            <select id="fitnessFunctionSelect"></select>
+            <button id="addWallButton">Add Wall</button>
+
+        </div>
+        <main>
+            <div id="rowInputs">
+                <label id="safeZone" for="safeZoneSlider">Safezone</label> -->
+                <input
+                    type="range"
+                    id="safeZoneSlider"
+                    min="10"
+                    max="500"
+                    value="100"
+                    orient="vertical"
+                    class="slider"
+                />
+
+                <label id="brainSize" for="brainSizeSlider">Brain 6</label>
+                <input type="range" id="brainSizeSlider" min="1" max="10" value="6" class="slider" />
+                <label id="geneNumber" for="geneNumberSlider">Gene Number 20</label>
+                <input type="range" id="geneNumberSlider" min="1" max="100" value="20" class="slider" />
+
+                <label id="decisionThreshold" for="decisionThresholdSlider">Threshold 0.4</label>
+                <input type="range" id="decisionThresholdSlider" min="1" max="100" value="40" class="slider" />
+            </div>
+        </main>
+        <script src="sketch.js"></script>
+        <script src="creature.js"></script>
+        <script src="gene.js"></script>
+        <script src="brain.js"></script>
+        <script src="brainVis.js"></script>
+        <script src="chart.js"></script>
+        <script src="simulation.js"></script>
+        <script src="neuron.js"></script>
+        <script src="constants.js"></script>
+    </body>
+</html>
