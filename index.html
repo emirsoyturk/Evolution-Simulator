@@ -1,118 +1,295 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <title>Evolution</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Evolution Simulator</title>
   </head>
   <body>
-
-    <div id="gen-fit">
-      <h2 id="generation"></h2>
-
-      <button id="resetButton">Reset</button>
-      <button id="playButton">Play</button>
-      <button id="nextButton">Next</button>
-      <select id="fitnessFunctionSelect"></select>
-      <select id="creatureNumberSelect">
-        <option value="100">100</option>
-        <option value="200">200</option>
-        <option value="500">500</option>
-        <option value="1000">1000</option>
-      </select>
-      <button id="addWallButton">Add Wall</button>
-      <label for="optimizeGraph">Shrink Graph</label>
-      <input type="checkbox" id="optimizeGraph" checked="true" />
-      <label id="x" for="xSlider" hidden="true">X: 0</label>
-      <input
-        style="-webkit-appearance: slider-horizontal"
-        type="range"
-        id="xSlider"
-        min="0"
-        max="1000"
-        value="0"
-        hidden="true"
-      />
-      <label id="y" for="ySlider" hidden="true">Y: 0 </label>
-      <input
-        style="-webkit-appearance: slider-horizontal"
-        type="range"
-        id="ySlider"
-        min="0"
-        max="1000"
-        value="0"
-        hidden="true"
-      />
-    </div>
-    <main>
-      <div id="rowInputs">
-        <label id="mutationRate" for="mutationRateSlider">Mutation: 0.05</label>
-        <input
-          type="range"
-          id="mutationRateSlider"
-          min="0"
-          max="1000"
-          value="50"
-          orient="vertical"
-          class="slider"
-        />
-        <div id="safeZones">
-          <div id="safeZone">
-            <label id="safeZoneX" for="safeZoneSliderX">Width</label>
-            <input
-              type="range"
-              id="safeZoneSliderX"
-              min="10"
-              max="1000"
-              value="100"
-              orient="vertical"
-              class="slider"
-            />
+    <section id="tabs">
+      <div class="container">
+        <ul class="nav nav-tabs" style="margin-top: 2rem" role="tablist">
+          <li class="nav-item h3">
+            <a
+              class="nav-link active"
+              data-bs-toggle="tab"
+              href="#how"
+              role="tab"
+            >
+              How it works
+            </a>
+          </li>
+          <li class="nav-item h3">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              href="#simulation"
+              role="tab"
+            >
+              Simulation
+            </a>
+          </li>
+          <li class="nav-item h3">
+            <a class="nav-link" data-bs-toggle="tab" href="#graph" role="tab">
+              Graph
+            </a>
+          </li>
+          <li class="nav-item h3">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              href="#settings"
+              role="tab"
+            >
+              Settings
+            </a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="how" role="how">
+            <div class="d-flex flex-column justify-content-between">
+              <h1 class="text-center mt-4">What is Evolution</h1>
+              <span class="h4">
+                There are four principles at work in evolution, variation,
+                inheritance, selection, time</span
+              >
+              <div class="d-flex flex-row justify-content-between mt-4">
+                <div
+                  class="card"
+                  style="width: 23%; background-color: cornflowerblue"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">Variation</h4>
+                    <p class="card-text">
+                      Variation is the process by which new genetic material is
+                      introduced into a population.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  style="width: 23%; background-color: cornflowerblue"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">Inheritance</h4>
+                    <p class="card-text">
+                      Inheritance is the process by which genetic material is
+                      passed from one generation to the next.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  style="width: 23%; background-color: cornflowerblue"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">Selection</h4>
+                    <p class="card-text">
+                      Selection is the process by which individuals that have
+                      inherited favourable traits produce more offspring than
+                      individuals that have not.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  style="width: 23%; background-color: cornflowerblue"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title">Time</h4>
+                    <p class="card-text">
+                      Time is the process by which the process of evolution
+                      occurs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column justify-content-between">
+              <h1 class="text-center mt-4">How it works</h1>
+              <span class="h4"> This is a simulation of evolution. </span>
+              <div class="d-flex flex-row justify-content-between mt-4">
+                <div
+                  class="card"
+                  style="width: 30%; background-color: rgb(228, 184, 152)"
+                >
+                  <div class="card-body">
+                    <h1 class="card-title h3 text-body fw-bolder">
+                      Simulation
+                    </h1>
+                    <p class="card-text">
+                      <li class="text-body fw-bolder">
+                        Green area is where creatures can produce.
+                      </li>
+                      <li class="text-body fw-bolder">
+                        You can view creatures in the simulation tab.
+                      </li>
+                      <li class="text-body fw-bolder">
+                        Click start to see the creatures evolve.
+                      </li>
+                      <li class="text-body fw-bolder">
+                        or click next to see the next generation.
+                      </li>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  style="width: 30%; background-color: rgb(105, 138, 198)"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title h3 text-body fw-bolder">Graph</h4>
+                    <p class="card-text">
+                      <li class="text-body fw-bolder">
+                        You can view the graph in the graph tab.
+                      </li>
+                      <li class="text-body fw-bolder">
+                        The graph shows the population of each creature.
+                      </li>
+                      <li class="text-body fw-bolder">
+                        The graph also shows how many creatures produced(blue),
+                        died(red) and did not produce(gray).
+                      </li>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="card"
+                  style="width: 30%; background-color: rgb(179, 226, 128)"
+                >
+                  <div class="card-body">
+                    <h4 class="card-title h3 text-body fw-bolder">Settings</h4>
+                    <p class="card-text text-body fw-bolder">
+                      <li class="text-body fw-bolder">
+                        Change number of creatures.(Required reset)
+                      </li>
+                      <li class="text-body fw-bolder">
+                        Change brain size of creatures.(Required reset)
+                      </li>
+                      <li class="text-body fw-bolder">
+                        Change number of genes in the creatures brain.(Required
+                        reset)
+                      </li>
+                      <li class="text-body fw-bolder">
+                        Change decision threshold.
+                      </li>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="safeZone">
-            <label id="safeZoneY" for="safeZoneSliderY">Height</label>
-            <input
-              type="range"
-              id="safeZoneSliderY"
-              min="10"
-              max="1000"
-              value="100"
-              orient="vertical"
-              class="slider"
-            />
+          <div class="tab-pane mt-4" id="simulation" role="tabpanel">
+            <main></main>
+            <div class="d-flex flex-row justify-content-start">
+              <button class="btn btn-dark resetButton">Reset</button>
+              <button class="btn btn-dark playButton">Play</button>
+              <button class="btn btn-dark nextButton">Next</button>
+              <button class="btn btn-dark addWallButton">Add Wall</button>
+            </div>
+          </div>
+          <div class="tab-pane mt-4" id="graph" role="graph">
+            <div class="d-flex flex-row justify-content-start">
+              <button class="btn btn-dark resetButton">Reset</button>
+              <button class="btn btn-dark playButton">Play</button>
+              <button class="btn btn-dark nextButton">Next</button>
+            </div>
+          </div>
+          <div class="tab-pane" id="settings" role="settings">
+            <h2
+              class="h1"
+              style="text-align: center; margin: 2rem"
+              id="generation"
+            ></h2>
+            <div
+              class="d-flex flex-row justify-content-around"
+              style="align-items: center"
+            >
+              <button class="btn btn-dark resetButton">Reset</button>
+              <div class="d-flex flex-row">
+                <label for="fitnessFunctionSelect" style="margin-right: 1rem"
+                  >Fitness Function:
+                </label>
+                <select id="fitnessFunctionSelect"></select>
+              </div>
+              <div class="d-flex flex-row" style="margin-left: 0.2rem">
+                <label for="creatureNumber" style="margin-right: 1rem"
+                  >Creature Number:
+                </label>
+                <input type="number" id="creatureNumber" value="100" />
+              </div>
+              <div class="d-flex flex-row" style="margin-left: 0.2rem">
+                <label for="optimizeGraph" style="margin-right: 1rem"
+                  >Optimize Graph:
+                </label>
+                <input type="checkbox" id="optimizeGraph" checked="true" />
+              </div>
+            </div>
+            <div id="sliderInputs">
+              <div class="sliderInput">
+                <label id="mutationRate" for="mutationRateSlider"
+                  >Mutation: 0.05</label
+                >
+                <input
+                  type="range"
+                  id="mutationRateSlider"
+                  min="0"
+                  max="1000"
+                  value="50"
+                  orient="vertical"
+                  class="slider"
+                />
+              </div>
+              <div class="sliderInput">
+                <label id="brainSize" for="brainSizeSlider">Brain 6</label>
+                <input
+                  type="range"
+                  id="brainSizeSlider"
+                  min="1"
+                  max="10"
+                  value="6"
+                  class="slider"
+                />
+              </div>
+              <div class="sliderInput">
+                <label id="geneNumber" for="geneNumberSlider"
+                  >Gene Number 20</label
+                >
+                <input
+                  type="range"
+                  id="geneNumberSlider"
+                  min="1"
+                  max="100"
+                  value="20"
+                  class="slider"
+                />
+              </div>
+              <div class="sliderInput">
+                <label id="decisionThreshold" for="decisionThresholdSlider"
+                  >Threshold 0.4</label
+                >
+                <input
+                  type="range"
+                  id="decisionThresholdSlider"
+                  min="1"
+                  max="100"
+                  value="40"
+                  class="slider"
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        <label id="brainSize" for="brainSizeSlider">Brain 6</label>
-        <input
-          type="range"
-          id="brainSizeSlider"
-          min="1"
-          max="10"
-          value="6"
-          class="slider"
-        />
-        <label id="geneNumber" for="geneNumberSlider">Gene Number 20</label>
-        <input
-          type="range"
-          id="geneNumberSlider"
-          min="1"
-          max="100"
-          value="20"
-          class="slider"
-        />
-        <label id="decisionThreshold" for="decisionThresholdSlider"
-          >Threshold 0.4</label
-        >
-        <input
-          type="range"
-          id="decisionThresholdSlider"
-          min="1"
-          max="100"
-          value="40"
-          class="slider"
-        />
       </div>
-    </main>
+    </section>
+
     <script src="sketch.js"></script>
     <script src="creature.js"></script>
     <script src="gene.js"></script>
@@ -122,5 +299,6 @@
     <script src="simulation.js"></script>
     <script src="neuron.js"></script>
     <script src="constants.js"></script>
+    <script src="eventHandler.js"></script>
   </body>
 </html>

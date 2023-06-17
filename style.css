@@ -15,6 +15,15 @@ body {
   flex-direction: column;
 }
 
+.wrapper {
+  width: 70%;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
 main {
   width: 100%;
   height: fit-content;
@@ -58,7 +67,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: center;
-    align-items: center;
+  align-items: center;
   width: fit-content;
 }
 

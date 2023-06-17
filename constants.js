@@ -1,12 +1,12 @@
-var widthCalc = Math.floor(Math.min(window.innerWidth * 0.9, 1400) / 10) * 10;
-var heightCalc = Math.floor((window.innerHeight * 0.9) / 10) * 10;
+var widthCalc = Math.min(Math.floor((window.innerWidth * 0.7) / 10) * 10, 1000);
+var heightCalc = Math.floor((window.innerHeight * 0.7) / 10) * 10;
 var safeZoneOffset = {
   x: 0,
   y: 0,
 };
 var safeZone = {
-  x: 100,
-  y: 100,
+  x: widthCalc * 0.2,
+  y: widthCalc * 0.2,
 };
 var constants = {
   geneNumber: 20,
@@ -25,14 +25,10 @@ var constants = {
   newGenerationFrameCount: 200,
   decisionThreshold: 0.4,
   gridSize: {
-    x: widthCalc * 0.9,
-    y: heightCalc * 0.9,
-    simX: widthCalc * 0.6,
-    simY: heightCalc * 0.6,
-    chartX: widthCalc * 0.9,
-    chartY: heightCalc * 0.2,
+    x: widthCalc * 1,
+    y: widthCalc * 0.6,
     brainX: widthCalc * 0.3,
-    brainY: heightCalc * 0.6,
+    brainY: widthCalc * 0.6,
   },
   geneNames: [
     "LocX",
@@ -55,12 +51,12 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(0, 0, safeZone.x, gridSize.simY);
+        sim.rect(0, 0, safeZone.x, gridSize.y);
       },
       calculate: (creature) => (creature.x < safeZone.x ? 1 : 0),
     },
-    custom: {
-        name: "custom",
+    draw: {
+        name: "draw",
         draw: () => {
           sim.strokeWeight(0);
           sim.fill(0, 200, 0, 120);
@@ -81,8 +77,8 @@ var constants = {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
         sim.rect(
-          gridSize.simX / 2 - safeZone.x / 2,
-          gridSize.simY / 2 - safeZone.y / 2,
+          gridSize.x / 2 - safeZone.x / 2,
+          gridSize.y / 2 - safeZone.y / 2,
           safeZone.x,
           safeZone.y
         );
@@ -100,7 +96,7 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(0, 0, gridSize.simX, safeZone.y);
+        sim.rect(0, 0, gridSize.x, safeZone.y);
       },
       calculate: (creature) => (creature.y < safeZone.y ? 1 : 0),
     },
@@ -109,7 +105,7 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(0, gridSize.simY - safeZone.y, gridSize.simX, safeZone.y);
+        sim.rect(0, gridSize.y - safeZone.y, gridSize.x, safeZone.y);
       },
       calculate: (creature) => (creature.y > sim.height - safeZone.y ? 1 : 0),
     },
@@ -118,7 +114,7 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(gridSize.simX - safeZone.x, 0, safeZone.x, gridSize.simY);
+        sim.rect(gridSize.x - safeZone.x, 0, safeZone.x, gridSize.y);
       },
       calculate: (creature) => (creature.x > sim.width - safeZone.x ? 1 : 0),
     },
@@ -137,7 +133,7 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(gridSize.simX - safeZone.x, 0, safeZone.x, safeZone.y);
+        sim.rect(gridSize.x - safeZone.x, 0, safeZone.x, safeZone.y);
       },
       calculate: (creature) =>
         creature.x > sim.width - safeZone.x && creature.y < safeZone.y ? 1 : 0,
@@ -147,7 +143,7 @@ var constants = {
       draw: () => {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
-        sim.rect(0, gridSize.simY - safeZone.y, safeZone.x, safeZone.y);
+        sim.rect(0, gridSize.y - safeZone.y, safeZone.x, safeZone.y);
       },
       calculate: (creature) =>
         creature.x < safeZone.x && creature.y > sim.height - safeZone.y ? 1 : 0,
@@ -158,8 +154,8 @@ var constants = {
         sim.strokeWeight(0);
         sim.fill(0, 200, 0, 120);
         sim.rect(
-          gridSize.simX - safeZone.x,
-          gridSize.simY - safeZone.y,
+          gridSize.x - safeZone.x,
+          gridSize.y - safeZone.y,
           safeZone.x,
           safeZone.y
         );
@@ -174,7 +170,7 @@ var constants = {
     //   draw: () => {
     //     sim.strokeWeight(0);
     //     sim.fill(0, 200, 0, 120);
-    //     sim.ellipse(gridSize.simX / 2, gridSize.simY / 2, safeZone.x, safeZone.x);
+    //     sim.ellipse(gridSize.x / 2, gridSize.y / 2, safeZone.x, safeZone.x);
     //   },
     //   calculate: (creature) =>
     //     Math.pow(creature.x - sim.width / 2, 2) +

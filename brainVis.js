@@ -102,14 +102,3 @@ function drawBrain() {
     rect(0, 0, gridSize.brainX, gridSize.brainY);
     image(brainVis, 0, 0)
 }
-
-
-function mouseClicked() {
-    var x = Math.floor((mouseX - gridSize.brainX) / creatureSize)
-    var y = Math.floor(mouseY / creatureSize)
-    var index = x + y * (sim.width / creatureSize)
-    var cell = grid[index]
-    if (typeof cell == 'object') {
-        randomCreature = cell
-    }
-}
