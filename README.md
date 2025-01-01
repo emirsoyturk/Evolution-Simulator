@@ -36,7 +36,7 @@
 ## Getting Started
 
 This is a simple evolution simulator. It is a work in progress, and is not yet complete. It is written in Javascript, and uses the p5.js library.<br/>
-Demo: https://evolution-sim.netlify.com/
+Demo: [https://evolution-sim.netlify.com/](https://evolution-sim.netlify.app)
 
 ### Installation
 
